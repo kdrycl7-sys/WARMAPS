@@ -75,6 +75,20 @@ validates an allowlist of feeds, applies timeouts/rate limits, and returns RSS/X
 rss2json-compatible JSON shape. No API key is required or bundled. A failed or empty feed is
 shown as an error/empty state; it is never replaced with invented content.
 
+### X links and Turkish translation
+
+The dashboard includes public X profile/search links for relevant international, Arabic,
+English, and Russian-language news accounts. These are navigation links only: the app does
+not scrape X, claim that a post is true, or require the X API. Real-time X post ingestion
+requires an authenticated, policy-compliant backend and is intentionally not bundled.
+
+RSS items may be translated by setting `localStorage.warmapsTranslateProxy` to an HTTPS
+endpoint. The endpoint receives `POST {"text":"...","source":"en|ar|ru","target":"tr"}` and
+must return `{"translation":"..."}` (or `translatedText`). The UI labels translated titles
+and keeps the original title visible. Without this proxy, original titles are shown; no
+fake or silent translation is presented as fact. Do not put paid provider keys in the
+browser.
+
 ### Deployment
 
 Deploy the repository as static hosting (GitHub Pages, Netlify, Cloudflare Pages, or an
