@@ -102,6 +102,11 @@ configured publishers. This is corroboration of reporting, not independent verif
 the event. A production proxy should preserve `source`, `published`, and optional location
 metadata when normalizing feeds.
 
+The interface also remembers the selected conflict and theme locally, offers a verification
+filter and exports the currently loaded headlines as JSON. If a refresh fails, a previously
+successful feed is shown with an `Önbellek` timestamp rather than being presented as current.
+The app accepts only HTTP(S) source links and uses `noopener noreferrer` for external pages.
+
 ### Deployment
 
 Deploy the repository as static hosting (GitHub Pages, Netlify, Cloudflare Pages, or an
