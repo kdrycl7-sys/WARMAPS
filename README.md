@@ -89,6 +89,19 @@ and keeps the original title visible. Without this proxy, original titles are sh
 fake or silent translation is presented as fact. Do not put paid provider keys in the
 browser.
 
+### Map locations, verification, and media
+
+The UI shows a red marker as live only when a configured feed/proxy supplies numeric
+`lat`, `lng`, and optional `location` fields for that item. Otherwise markers are amber
+archive/demo context and are explicitly labeled. Clicking a marker opens the related
+headlines plus public YouTube, VK, X, and image-search links for that location. These links
+are discovery tools, not endorsements or proof that a video/image depicts the event.
+
+News cards show `tek kaynak` or `N kaynak` based on repeated matching titles from distinct
+configured publishers. This is corroboration of reporting, not independent verification of
+the event. A production proxy should preserve `source`, `published`, and optional location
+metadata when normalizing feeds.
+
 ### Deployment
 
 Deploy the repository as static hosting (GitHub Pages, Netlify, Cloudflare Pages, or an
