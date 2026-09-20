@@ -39,3 +39,45 @@ that a given report says what the card summarises.
 
 *Fog of War flagging is present in the data on 15 events but is not yet rendered in the
 interface. It is not currently visible to readers.*
+
+## Turkish live conflict dashboard
+
+The default `index.html` is now a small Turkish PWA dashboard for:
+
+- Ukrayna–Rusya
+- İran–ABD
+- Suudi Arabistan–Yemen
+
+It keeps the existing `warmaps-data.js` event archive available for map context, but renders
+those points as **arşiv/demo — doğrulama gerekli** rather than as live facts. No fabricated live
+events or casualty counters are generated. The written feed only displays items returned by
+the configured public feeds and includes the publisher, timestamp, and a link to the original
+report. Video links are YouTube search/channel pages; the app does not scrape or embed videos.
+
+### Running locally
+
+This is a static app. Serve the repository over HTTP (rather than opening `index.html` as a
+`file://` URL), for example:
+
+```sh
+python -m http.server 8080
+```
+
+Then open `http://localhost:8080/`. The Leaflet and OpenStreetMap assets are loaded from public
+CDNs, so an internet connection is required for the basemap and feeds.
+
+### Feed adapter and CORS
+
+`app.js` uses the public `rss2json.com` adapter by default. RSS publishers frequently block
+browser CORS requests and public adapters may rate-limit requests. For production, set
+`localStorage.warmapsProxy` to a serverless endpoint that accepts `?url=<encoded RSS URL>`,
+validates an allowlist of feeds, applies timeouts/rate limits, and returns RSS/XML or the
+rss2json-compatible JSON shape. No API key is required or bundled. A failed or empty feed is
+shown as an error/empty state; it is never replaced with invented content.
+
+### Deployment
+
+Deploy the repository as static hosting (GitHub Pages, Netlify, Cloudflare Pages, or an
+equivalent host). If a proxy is needed, deploy it separately as a serverless function and set
+`warmapsProxy` in the browser after deployment. Review publisher terms, cache responses, and
+keep the disclaimer visible: feeds can be delayed, incomplete, or unverified.
